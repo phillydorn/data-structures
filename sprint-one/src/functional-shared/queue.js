@@ -8,7 +8,6 @@ var Queue = function(){
   someInstance.storage = {}
 
   _.extend(someInstance, queueMethods)
-  debugger
   return someInstance
 };
 

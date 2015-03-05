@@ -2,8 +2,11 @@ var Queue = function(){
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
   var someInstance = {}
-  var storage = {}
-  var size = 0
+  // var storage = {}
+  someInstance.start = -1
+  someInstance.end = -1
+  someInstance.storage = {}
+
   _.extend(someInstance, queueMethods)
   debugger
   return someInstance
@@ -11,22 +14,19 @@ var Queue = function(){
 
 var queueMethods = {
 	enqueue : function(val){
-		storage[size] = val
-		size++
+		this.end++
+		this.storage[this.end] = val
 	},
 
 	dequeue : function(){
-		var result = storage[0]
-		_.each(storage, function(value, key, list){
-			list[key] = list[+key + 1]
-		})
-		delete storage[size-1]
-		size && size--
+		this.end - this.start && this.start++
+		var result = this.storage[this.start]
+		delete this.storage[this.start]
 		return result
 	},
 
 	size : function(){
-		return size
+		return this.end - this.start
 	}
 };
 

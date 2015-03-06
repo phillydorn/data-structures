@@ -23,16 +23,20 @@ Graph.prototype.hasEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
-  debugger
   this.storage[fromNode]["edges"][toNode] = this.storage[toNode]
   this.storage[toNode]["edges"][fromNode] = this.storage[fromNode]
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
-
+  delete this.storage[fromNode]["edges"][toNode]
+  delete this.storage[toNode]["edges"][fromNode]
 };
 
 Graph.prototype.forEachNode = function(cb){
+  debugger
+  _.each(this.storage, function(value, key){
+    cb(key)
+  })
 };
 
 /*

@@ -28,21 +28,16 @@ binaryTreeMethods.insert = function(val, node){
 
 binaryTreeMethods.contains = function(val, node){
   node = node || this
-  if (val === node.value) {
-    return true
-  } else if (val < node.value) {
-      if (node.left){
-        return this.contains(val, node.left)
-      } else {
-        return false
-      }
-  } else {
-      if (node.right) {
-        return this.contains(val, node.right)
-      } else {
-          return false
-      }
-    }
+
+  return val === node.value ? 
+    true :
+    val < node.value ? 
+      node.left ? 
+        this.contains(val, node.left) :
+        false : 
+      node.right ?
+        this.contains(val, node.right) :
+        false
 }
 
 binaryTreeMethods.depthFirstLog = function(func, node){

@@ -28,7 +28,9 @@ HashTable.prototype.remove = function(k){
   for (var j = 0; j < bucket.length; j++) {
     if (bucket[j][0] === k) {
       this._storage[i][j][1] = null
+      // this code would actually delete it
       // this._storage[i] = bucket.slice(0, j) + bucket.slice(j + 1, bucket.length)
+      // => returns undefined
     }
   }
 };

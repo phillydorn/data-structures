@@ -6,15 +6,17 @@ var HashTable = function(){
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
   var inBucket = [k,v]
-  if (!Array.isArray(this._storage[i])) {
-    this._storage[i]=[]
+  var bucket = this._storage.get(i)
+  if (!Array.isArray(bucket)){
+    bucket = []
   }
-  this._storage[i].push(inBucket)
+  bucket.push(inBucket)
+  this._storage.set(i, bucket)
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var bucket = this._storage[i]
+  var bucket = this._storage.get(i)
   for (var j = 0; j < bucket.length; j++) {
     if (bucket[j][0] === k) {
       return bucket[j][1]
@@ -24,13 +26,12 @@ HashTable.prototype.retrieve = function(k){
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var bucket = this._storage[i]
+  var bucket = this._storage.get(i)
   for (var j = 0; j < bucket.length; j++) {
     if (bucket[j][0] === k) {
-      this._storage[i][j][1] = null
-      // this code would actually delete it
-      // this._storage[i] = bucket.slice(0, j) + bucket.slice(j + 1, bucket.length)
-      // => returns undefined
+      bucket[j][1] = null
+      this._storage.set(i, bucket)
+
     }
   }
 };

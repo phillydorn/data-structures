@@ -23,6 +23,13 @@ describe('linkedList', function() {
     expect(linkedList.tail.value).to.equal(5);
   });
 
+  it('should designate a new head when new nodes are added to head', function(){
+    linkedList.addToHead(7)
+    expect(linkedList.head.value).to.equal(7)
+    linkedList.addToHead(8)
+    expect(linkedList.head.value).to.equal(8)
+  })
+
   it('should remove the head from the list when removeHead is called', function(){
     linkedList.addToTail(4);
     linkedList.addToTail(5);
@@ -39,9 +46,13 @@ describe('linkedList', function() {
   it("should contain a value that was added", function(){
     linkedList.addToTail(4);
     linkedList.addToTail(5);
+    linkedList.addToHead(7);
+    linkedList.addToHead(8);
     expect(linkedList.contains(4)).to.equal(true);
     expect(linkedList.contains(5)).to.equal(true);
     expect(linkedList.contains(6)).to.equal(false);
+    expect(linkedList.contains(7)).to.equal(true);
+    expect(linkedList.contains(8)).to.equal(true);
   });
 
   it('should not contain a value that was removed', function(){
@@ -51,5 +62,31 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
+  it('should designate a previous for every node added', function(){
+    linkedList.addToHead(8)
+    linkedList.addToHead(7)
+    linkedList.addToTail(9)
+    linkedList.addToTail(10)
+    expect(linkedList.tail.previous.value).to.equal(9)
+  })
+
   // add more tests here to test the functionality of linkedList
+  it('should remove the tail node and return its value', function() {
+    linkedList.addToTail(7)
+    expect(linkedList.removeTail()).to.equal(7)
+  })
+
+  it('should designate a new tail when a tail is removed', function(){
+    linkedList.addToTail(7)
+    linkedList.addToTail(8)
+    linkedList.removeTail()
+    expect(linkedList.tail.value).to.equal(7)
+  })
+
+
+
+
+
+
+
 });

@@ -33,7 +33,6 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.forEachNode = function(cb){
-  debugger
   _.each(this.storage, function(value, key){
     cb(key)
   })

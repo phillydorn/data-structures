@@ -57,7 +57,24 @@ describe('tree', function() {
     expect(lowTree.parent).to.equal(null)
     expect(tree.children[0].children[0]).to.equal(undefined)
   })
+
+  it ('should call the callback on every value in the tree', function () {
+    tree.addChild(5)
+    tree.children[0].addChild(6)
+    tree.children[0].children[0].addChild(7)
+    tree.children[0].children[0].addChild(8)
+    var valArray = []
+    var cb = function (node) {
+      valArray.push(node.value)
+    }
+    tree.traverse(cb)
+    expect(valArray[0]).to.equal(5)
+    expect(valArray[3]).to.equal(8)
+
+  })
 });
+
+
 
 
 

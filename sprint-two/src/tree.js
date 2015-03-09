@@ -46,6 +46,14 @@ treeMethods.contains = function(target, node){
 
 };
 
+treeMethods.traverse = function(callback, node) {
+  node = node || this.children[0]
+  callback(node)
+  _.each(node.children, function(childNode) {
+    node.traverse(callback, childNode)
+  })
+}
+
 
 /*
  * Complexity: What is the time complexity of the above functions?

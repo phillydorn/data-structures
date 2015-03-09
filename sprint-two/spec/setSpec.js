@@ -24,4 +24,23 @@ describe('set', function() {
     expect(set.contains("Mel Gibson")).to.equal(false);
   });
 
+  it ('should add values of type number', function() {
+    set.add(8)
+    set.add(9)
+    expect(set.contains(8)).to.equal(true)
+    expect(set.contains(9)).to.equal(true)
+    expect(set.contains('8')).to.equal(false)
+    expect(set.contains('9')).to.equal(false)
+  })
+
+   it ('should add values of any type', function() {
+    var arr = [1,2,3]
+    var obj = {'key':5}
+    set.add(arr)
+    set.add(obj)
+    expect(set.contains(arr)).to.equal(true)
+    expect(set.contains(obj)).to.equal(true)
+    //expect(set.contains([1,2,3])).to.equal(false)
+  })
+
 });
